@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>NovaTech | Modern Website</title>
+
+<meta name="description" content="A modern, responsive website built with HTML, CSS, and JavaScript.">
+
+<style>
+    /* =========================
+       GLOBAL STYLES
+    ========================= */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+
+    :root {
+        --primary: #6c63ff;
+        --secondary: #00c9a7;
+        --background: #f7f8fc;
+        --surface: #ffffff;
+        --text: #22223b;
+        --muted: #686880;
+        --border: #e5e7eb;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    body.dark {
+        --background: #10111b;
+        --surface: #191a2b;
+        --text: #f4f4ff;
+        --muted: #b5b5cc;
+        --border: #303147;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--background);
+        color: var(--text);
+        line-height: 1.6;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    button,
+    input,
+    textarea {
+        font: inherit;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .section {
+        padding: 90px 0;
+    }
+
+    .section-heading {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .section-heading h2 {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+    }
+
+    .section-heading p {
+        color: var(--muted);
+        max-width: 650px;
+        margin: auto;
+    }
+
+    .highlight {
+        color: var(--primary);
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 13px 27px;
+        border-radius: 8px;
+        border: 2px solid var(--primary);
+        background: var(--primary);
+        color: white;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow);
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: var(--primary);
+    }
+
+    /* =========================
+       NAVIGATION BAR
+    ========================= */
+
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+    }
+
+    .navbar {
+        min-height: 75px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary);
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+    }
+
+    .nav-links a {
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: var(--primary);
+    }
+
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        padding: 9px 12px;
+        border-radius: 8px;
+    }
+
+    .menu-btn {
+        display: none;
+        font-size: 1.3rem;
+    }
+
+    /* =========================
+       HERO SECTION
+    ========================= */
+
+    .hero {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        background:
+            radial-gradient(
+                circle at 90% 20%,
+                rgba(108, 99, 255, 0.15),
+                transparent 35%
+            );
+    }
+
+    .hero-content {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .hero-text .badge {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 30px;
+        background: rgba(108, 99, 255, 0.12);
+        color: var(--primary);
+        font-weight: bold;
+        margin-bottom: 22px;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(2.8rem, 5vw, 4.8rem);
+        line-height: 1.1;
+        margin-bottom: 25px;
+    }
+
+    .hero-text p {
+        font-size: 1.1rem;
+        color: var(--muted);
+        margin-bottom: 30px;
+        max-width: 580px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .hero-visual {
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .visual-card {
+        width: 320px;
+        min-height: 350px;
+        padding: 30px;
+        border-radius: 25px;
+        background: linear-gradient(135deg, #6c63ff, #9b8cff);
+        box-shadow: 0 25px 60px rgba(108, 99, 255, 0.3);
+        color: white;
+        transform: rotate(3deg);
+        animation: float 4s ease-in-out infinite;
+    }
+
+    .visual-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .visual-card p {
+        opacity: 0.9;
+    }
+
+    .visual-icon {
+        font-size: 5rem;
+        margin: 30px 0;
+    }
+
+    .mini-stat {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.18);
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0) rotate(3deg);
+        }
+
+        50% {
+            transform: translateY(-15px) rotate(1deg);
+        }
+    }
+
+    /* =========================
+       STATISTICS
+    ========================= */
+
+    .stats {
+        background: var(--surface);
+        padding: 45px 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+        text-align: center;
+    }
+
+    .stat h3 {
+        font-size: 2.5rem;
+        color: var(--primary);
+    }
+
+    .stat p {
+        color: var(--muted);
+    }
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    .service-card {
+        padding: 32px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: var(--surface);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow);
+    }
+
+    .service-icon {
+        width: 65px;
+        height: 65px;
+        display: grid;
+        place-items: center;
+        border-radius: 15px;
+        background: rgba(108, 99, 255, 0.12);
+        font-size: 2rem;
+        margin-bottom: 22px;
+    }
+
+    .service-card h3 {
+        font-size: 1.35rem;
+        margin-bottom: 12px;
+    }
+
+    .service-card p {
+        color: var(--muted);
+        margin-bottom: 18px;
+    }
+
+    .learn-more {
+        color: var(--primary);
+        font-weight: bold;
+    }
+
+    /* =========================
+       ABOUT SECTION
+    ========================= */
+
+    .about {
+        background: var(--surface);
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 60px;
+    }
+
+    .about-visual {
+        min-height: 380px;
+        display: grid;
+        place-items: center;
+        border-radius: 25px;
+        background: linear-gradient(135deg, #c8c4ff, #d8fff4);
+        font-size: 8rem;
+    }
+
+    .about-content h2 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 20px;
+    }
+
+    .about-content p {
+        color: var(--muted);
+        margin-bottom: 18px;
+    }
+
+    .feature-list {
+        margin: 25px 0;
+    }
+
+    .feature-list li {
+        margin: 12px 0;
+        font-weight: 600;
+    }
+
+    .feature-list li::before {
+        content: "✓";
+        color: var(--secondary);
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    /* =========================
+       PROJECTS
+    ========================= */
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    .project-card {
+        overflow: hidden;
+        border-radius: 16px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        transition: 0.3s;
+    }
+
+    .project-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow);
+    }
+
+    .project-image {
+        min-height: 210px;
+        display: grid;
+        place-items: center;
+        font-size: 4.5rem;
+        background: linear-gradient(135deg, #e5e2ff, #c5fff0);
+    }
+
+    .project-info {
+        padding: 25px;
+    }
+
+    .project-info h3 {
+        margin-bottom: 10px;
+    }
+
+    .project-info p {
+        color: var(--muted);
+        margin-bottom: 18px;
+    }
+
+    .tag {
+        display: inline-block;
+        font-size: 0.8rem;
+        background: rgba(108, 99, 255, 0.12);
+        color: var(--primary);
+        padding: 5px 10px;
+        border-radius: 20px;
+        margin: 3px;
+    }
+
+    /* =========================
+       TESTIMONIALS
+    ========================= */
+
+    .testimonials {
+        background: var(--surface);
+    }
+
+    .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+
+    .testimonial-card {
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        background: var(--background);
+    }
+
+    .stars {
+        color: #f4b400;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .testimonial-card > p {
+        color: var(--muted);
+        margin-bottom: 22px;
+    }
+
+    .person {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .avatar {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--primary);
+        color: white;
+        font-weight: bold;
+    }
+
+    .person small {
+        color: var(--muted);
+    }
+
+    /* =========================
+       CONTACT SECTION
+    ========================= */
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 50px;
+    }
+
+    .contact-info h3 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .contact-info > p {
+        color: var(--muted);
+        margin-bottom: 30px;
+    }
+
+    .contact-detail {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin: 22px 0;
+    }
+
+    .contact-detail span {
+        font-size: 1.5rem;
+    }
+
+    .contact-detail p {
+        color: var(--muted);
+    }
+
+    .contact-form {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 35px;
+        border-radius: 18px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 13px 15px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--background);
+        color: var(--text);
+        outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        border-color: var(--primary);
+    }
+
+    .form-group textarea {
+        min-height: 140px;
+        resize: vertical;
+    }
+
+    .contact-form .btn {
+        width: 100%;
+    }
+
+    /* =========================
+       NEWSLETTER
+    ========================= */
+
+    .newsletter {
+        background: linear-gradient(135deg, #6c63ff, #8e85ff);
+        color: white;
+        text-align: center;
+        padding: 70px 20px;
+    }
+
+    .newsletter h2 {
+        font-size: 2.3rem;
+        margin-bottom: 15px;
+    }
+
+    .newsletter p {
+        opacity: 0.9;
+        margin-bottom: 25px;
+    }
+
+    .newsletter-form {
+        display: flex;
+        gap: 10px;
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .newsletter-form input {
+        flex: 1;
+        min-width: 0;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        outline: none;
+    }
+
+    .newsletter-form button {
+        border: none;
+        border-radius: 8px;
+        padding: 14px 20px;
+        background: #22223b;
+        color: white;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+        background: #171729;
+        color: white;
+        padding: 65px 0 20px;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 35px;
+        margin-bottom: 40px;
+    }
+
+    .footer-brand .logo {
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .footer-brand p {
+        color: #b7b7cc;
+        max-width: 330px;
+    }
+
+    .footer-column h4 {
+        margin-bottom: 20px;
+    }
+
+    .footer-column li {
+        margin: 12px 0;
+    }
+
+    .footer-column a {
+        color: #b7b7cc;
+        transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+        color: white;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 12px;
+        margin-top: 22px;
+    }
+
+    .social-links a {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #45455b;
+        border-radius: 50%;
+    }
+
+    .copyright {
+        text-align: center;
+        border-top: 1px solid #343449;
+        padding-top: 22px;
+        color: #b7b7cc;
+    }
+
+    /* =========================
+       BACK TO TOP
+    ========================= */
+
+    .back-to-top {
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        width: 48px;
+        height: 48px;
+        border: none;
+        border-radius: 50%;
+        background: var(--primary);
+        color: white;
+        font-size: 1.3rem;
+        box-shadow: var(--shadow);
+        display: none;
+        z-index: 500;
+    }
+
+    .back-to-top.show {
+        display: block;
+    }
+
+    /* =========================
+       RESPONSIVE DESIGN
+    ========================= */
+
+    @media (max-width: 950px) {
+        .nav-links {
+            gap: 15px;
+        }
+
+        .hero-content {
+            gap: 25px;
+        }
+
+        .services-grid,
+        .projects-grid,
+        .testimonial-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .about-grid,
+        .contact-grid {
+            gap: 30px;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .navbar {
+            flex-wrap: wrap;
+            padding: 15px 0;
+        }
+
+        .menu-btn {
+            display: block;
+        }
+
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            gap: 0;
+            order: 3;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-links li {
+            width: 100%;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 12px 0;
+        }
+
+        .hero {
+            padding: 65px 0;
+        }
+
+        .hero-content,
+        .about-grid,
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-text {
+            text-align: center;
+        }
+
+        .hero-text p {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            justify-content: center;
+        }
+
+        .hero-visual {
+            min-height: 350px;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .services-grid,
+        .projects-grid,
+        .testimonial-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .about-visual {
+            min-height: 280px;
+            font-size: 6rem;
+        }
+
+        .section {
+            padding: 65px 0;
+        }
+
+        .section-heading h2,
+        .about-content h2 {
+            font-size: 2rem;
+        }
+
+        .newsletter-form {
+            flex-direction: column;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* =========================
+       ACCESSIBILITY
+    ========================= */
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+        outline: 3px solid var(--secondary);
+        outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            scroll-behavior: auto !important;
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- =========================
+     HEADER
+========================== -->
+
+<header>
+    <div class="container navbar">
+
+        <a href="#home" class="logo">NovaTech.</a>
+
+        <nav aria-label="Main navigation">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-actions">
+            <button
+                class="theme-btn"
+                id="themeToggle"
+                type="button"
+                aria-label="Toggle dark mode"
+            >
+                🌙
+            </button>
+
+            <button
+                class="menu-btn"
+                id="menuToggle"
+                type="button"
+                aria-label="Toggle navigation"
+                aria-expanded="false"
+                aria-controls="navLinks"
+            >
+                ☰
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- =========================
+     HERO SECTION
+========================== -->
+
+<main>
+
+    <section class="hero" id="home">
+        <div class="container hero-content">
+
+            <div class="hero-text">
+
+                <span class="badge">
+                    🚀 Welcome to the future
+                </span>
+
+                <h1>
+                    Build Something
+                    <span class="highlight">Amazing</span>
+                    With Us.
+                </h1>
+
+                <p>
+                    We create beautiful digital experiences that help
+                    businesses grow, connect with customers, and turn
+                    ambitious ideas into reality.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#services" class="btn">
+                        Explore Services →
+                    </a>
+
+                    <a href="#about" class="btn btn-outline">
+                        Learn More
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="hero-visual">
+
+                <div class="visual-card">
+
+                    <h3>Creative Ideas</h3>
+
+                    <p>
+                        Turning imagination into digital experiences.
+                    </p>
+
+                    <div class="visual-icon">💡</div>
+
+                    <div class="mini-stat">
+                        <div>
+                            <strong>Innovation</strong>
+                            <br>
+                            <small>Think differently</small>
+                        </div>
+
+                        <span>✨</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =========================
+         STATISTICS
+    ========================== -->
+
+    <section class="stats">
+        <div class="container stats-grid">
+
+            <div class="stat">
+                <h3>150+</h3>
+                <p>Projects Completed</p>
+            </div>
+
+            <div class="stat">
+                <h3>80+</h3>
+                <p>Happy Clients</p>
+            </div>
+
+            <div class="stat">
+                <h3>12+</h3>
+                <p>Team Members</p>
+            </div>
+
+            <div class="stat">
+                <h3>5+</h3>
+                <p>Years Experience</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =========================
+         SERVICES
+    ========================== -->
+
+    <section class="section" id="services">
+        <div class="container">
+
+            <div class="section-heading">
+                <h2>Our <span class="highlight">Services</span></h2>
+
+                <p>
+                    We provide creative and technical solutions to help
+                    your business stand out in the digital world.
+                </p>
+            </div>
+
+            <div class="services-grid">
+
+                <article class="service-card">
+                    <div class="service-icon">💻</div>
+
+                    <h3>Web Development</h3>
+
+                    <p>
+                        Fast, responsive, and modern websites built
+                        with clean code and user-friendly layouts.
+                    </p>
+
+                    <a href="#contact" class="learn-more">
+                        Get Started →
+                    </a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">🎨</div>
+
+                    <h3>UI/UX Design</h3>
+
+                    <p>
+                        Attractive interfaces and thoughtful user
+                        experiences that make every interaction simple.
+                    </p>
+
+                    <a href="#contact" class="learn-more">
+                        Get Started →
+                    </a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">📱</div>
+
+                    <h3>App Development</h3>
+
+                    <p>
+                        Mobile-friendly digital solutions designed
+                        for performance and accessibility.
+                    </p>
+
+                    <a href="#contact" class="learn-more">
+                        Get Started →
+                    </a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">📈</div>
+
+                    <h3>Digital Marketing</h3>
+
+                    <p>
+                        Reach the right audience with effective
+                        online strategies and engaging content.
+                    </p>
+
+                    <a href="#contact" class="learn-more">
+                        Get Started →
+                    </a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">🔍</div>
+
+                    <h3>SEO Optimization</h3>
+
+                    <p>
+                        Improve your website's discoverability with
+                        useful content and technical optimization.
+                    </p>
+
+                    <a href="#contact" class="learn-more">
+                        Get Started →
+                    </a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon">🛠️</div>
+
+                    <h3>Technical Support</h3>
+
+                    <p>
+                        Get help maintaining, improving, and
+                        troubleshooting your digital products.
+                    </p>
+
+                    <a href="#contact" class="learn-more">
+                        Get Started →
+                    </a>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section class="section about" id="about">
+        <div class="container about-grid">
+
+            <div class="about-visual">
+                🚀
+            </div>
+
+            <div class="about-content">
+
+                <h2>
+                    We Turn Your Ideas Into
+                    <span class="highlight">Reality</span>
+                </h2>
+
+                <p>
+                    NovaTech is a creative digital studio focused on
+                    helping people and businesses build a stronger
+                    online presence.
+                </p>
+
+                <p>
+                    We combine thoughtful design, modern technology,
+                    and a user-first approach to build useful digital
+                    experiences.
+                </p>
+
+                <ul class="feature-list">
+                    <li>Creative and original solutions</li>
+                    <li>Responsive website design</li>
+                    <li>Clean and maintainable code</li>
+                    <li>Focus on user experience</li>
+                    <li>Continuous improvement</li>
+                </ul>
+
+                <a href="#contact" class="btn">
+                    Work With Us →
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- =========================
+         PROJECTS
+    ========================== -->
+
+    <section class="section" id="projects">
+        <div class="container">
+
+            <div class="section-heading">
+                <h2>Our Latest <span class="highlight">Projects</span></h2>
+
+                <p>
+                    Explore a few sample projects that demonstrate
+                    different types of modern website design.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+
+                <article class="project-card">
+
+                    <div class="project-image">
+                        🛍️
+                    </div>
+
+                    <div class="project-info">
+                        <h3>Online Store</h3>
+
+                        <p>
+                            A clean storefront concept for presenting
+                            products and helping customers shop online.
+                        </p>
+
+                        <span class="tag">E-commerce</span>
+                        <span class="tag">Design</span>
+                    </div>
+
+                </article>
+
+                <article class="project-card">
+
+                    <div class="project-image">
+                        🏢
+                    </div>
+
+                    <div class="project-info">
+                        <h3>Business Website</h3>
+
+                        <p>
+                            A professional landing page concept for
+                            businesses and service providers.
+                        </p>
+
+                        <span class="tag">Business</span>
+                        <span class="tag">Responsive</span>
+                    </div>
+
+                </article>
+
+                <article class="project-card">
+
+                    <div class="project-image">
+                        🎓
+                    </div>
+
+                    <div class="project-info">
+                        <h3>Learning Platform</h3>
+
+                        <p>
+                            An educational website concept for
+                            presenting lessons and learning resources.
+                        </p>
+
+                        <span class="tag">Education</span>
+                        <span class="tag">Technology</span>
+                    </div>
+
+                </article>
+
+                <article class="project-card">
+
+                    <div class="project-image">
+                        🍔
+                    </div>
+
+                    <div class="project-info">
+                        <h3>Restaurant Website</h3>
+
+                        <p>
+                            A restaurant page concept featuring
+                            menus, information, and contact details.
+                        </p>
+
+                        <span class="tag">Restaurant</span>
+                        <span class="tag">Food</span>
+                    </div>
+
+                </article>
+
+                <article class="project-card">
+
+                    <div class="project-image">
+                        🏋️
+                    </div>
+
+                    <div class="project-info">
+                        <h3>Fitness Website</h3>
+
+                        <p>
+                            A modern layout for fitness programs,
+                            training services, and memberships.
+                        </p>
+
+                        <span class="tag">Fitness</span>
+                        <span class="tag">Lifestyle</span>
+                    </div>
+
+                </article>
+
+                <article class="project-card">
+
+                    <div class="project-image">
+                        ✈️
+                    </div>
+
+                    <div class="project-info">
+                        <h3>Travel Website</h3>
+
+                        <p>
+                            A travel-inspired design for discovering
+                            destinations and planning adventures.
+                        </p>
+
+                        <span class="tag">Travel</span>
+                        <span class="tag">Tourism</span>
+                    </div>
+
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         TESTIMONIALS
+    ========================== -->
+
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+
+            <div class="section-heading">
+                <h2>What People <span class="highlight">Say</span></h2>
+
+                <p>
+                    Sample testimonials demonstrating how customer
+                    feedback could be presented on a website.
+                </p>
+            </div>
+
+            <div class="testimonial-grid">
+
+                <article class="testimonial-card">
+
+                    <div class="stars">★★★★★</div>
+
+                    <p>
+                        "The website design is clean, easy to use,
+                        and looks great on my phone. The whole
+                        experience feels professional."
+                    </p>
+
+                    <div class="person">
+                        <div class="avatar">A</div>
+
+                        <div>
+                            <strong>Alex Morgan</strong>
+                            <br>
+                            <small>Small Business Owner</small>
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="testimonial-card">
+
+                    <div class="stars">★★★★★</div>
+
+                    <p>
+                        "I really like the modern layout and the
+                        way all the sections work together. It is
+                        simple and visually appealing."
+                    </p>
+
+                    <div class="person">
+                        <div class="avatar">S</div>
+
+                        <div>
+                            <strong>Sarah Johnson</strong>
+                            <br>
+                            <small>Designer</small>
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="testimonial-card">
+
+                    <div class="stars">★★★★★</div>
+
+                    <p>
+                        "A great example of how a responsive website
+                        can present information clearly across
+                        different screen sizes."
+                    </p>
+
+                    <div class="person">
+                        <div class="avatar">D</div>
+
+                        <div>
+                            <strong>Daniel Smith</strong>
+                            <br>
+                            <small>Developer</small>
+                        </div>
+                    </div>
+
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <section class="section" id="contact">
+        <div class="container">
+
+            <div class="section-heading">
+                <h2>Let's <span class="highlight">Connect</span></h2>
+
+                <p>
+                    Have a question or a project idea?
+                    Use the form below to get started.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+
+                <div class="contact-info">
+
+                    <h3>Get In Touch</h3>
+
+                    <p>
+                        We'd love to hear about your ideas.
+                        Fill in the form and tell us what you
+                        would like to create.
+                    </p>
+
+                    <div class="contact-detail">
+                        <span>📧</span>
+
+                        <div>
+                            <strong>Email</strong>
+                            <p>hello@example.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <span>📍</span>
+
+                        <div>
+                            <strong>Location</strong>
+                            <p>Your City, Your Country</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <span>🕒</span>
+
+                        <div>
+                            <strong>Working Hours</strong>
+                            <p>Monday – Friday</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <form class="contact-form" id="contactForm">
+
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your name"
+                            required
+                            maxlength="100"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                            maxlength="254"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+
+                        <select id="subject" name="subject" required>
+                            <option value="">Choose a subject</option>
+                            <option value="web">Web Development</option>
+                            <option value="design">UI/UX Design</option>
+                            <option value="app">App Development</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Write your message here..."
+                            required
+                            maxlength="3000"
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">
+                        Send Message →
+                    </button>
+
+                    <p
+                        id="formStatus"
+                        role="status"
+                        aria-live="polite"
+                        style="margin-top: 15px;"
+                    ></p>
+
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         NEWSLETTER
+    ========================== -->
+
+    <section class="newsletter">
+        <div class="container">
+
+            <h2>Stay Updated!</h2>
+
+            <p>
+                Join our newsletter for updates, ideas,
+                and useful resources.
+            </p>
+
+            <form class="newsletter-form" id="newsletterForm">
+
+                <label
+                    for="newsletterEmail"
+                    style="position:absolute;left:-9999px;"
+                >
+                    Your email address
+                </label>
+
+                <input
+                    type="email"
+                    id="newsletterEmail"
+                    placeholder="Enter your email address"
+                    required
+                    maxlength="254"
+                >
+
+                <button type="submit">
+                    Subscribe
+                </button>
+
+            </form>
+
+            <p
+                id="newsletterStatus"
+                role="status"
+                aria-live="polite"
+                style="margin-top: 15px;"
+            ></p>
+
+        </div>
+    </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <a href="#home" class="logo">NovaTech.</a>
+
+                <p>
+                    Building modern digital experiences with
+                    creativity, technology, and a focus on people.
+                </p>
+
+                <div class="social-links">
+                    <a href="#contact" aria-label="Facebook">f</a>
+                    <a href="#contact" aria-label="Instagram">◎</a>
+                    <a href="#contact" aria-label="LinkedIn">in</a>
+                    <a href="#contact" aria-label="YouTube">▶</a>
+                </div>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Quick Links</h4>
+
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Our Services</h4>
+
+                <ul>
+                    <li><a href="#services">Web Design</a></li>
+                    <li><a href="#services">Development</a></li>
+                    <li><a href="#services">Marketing</a></li>
+                    <li><a href="#services">SEO</a></li>
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Support</h4>
+
+                <ul>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#contact">Help Center</a></li>
+                    <li><a href="#contact">FAQs</a></li>
+                    <li><a href="#contact">Feedback</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            <p>
+                &copy; <span id="year"></span> NovaTech.
+                All rights reserved.
+            </p>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- BACK TO TOP BUTTON -->
+
+<button
+    class="back-to-top"
+    id="backToTop"
+    type="button"
+    aria-label="Back to top"
+>
+    ↑
+</button>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script>
+
+    // ---------------------------------
+    // MOBILE NAVIGATION
+    // ---------------------------------
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+
+        const isOpen = navLinks.classList.toggle("active");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
+
+        menuToggle.textContent = isOpen ? "✕" : "☰";
+
+    });
+
+
+    // Close mobile navigation after clicking a link
+
+    document.querySelectorAll("#navLinks a").forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            navLinks.classList.remove("active");
+
+            menuToggle.setAttribute("aria-expanded", "false");
+
+            menuToggle.textContent = "☰";
+
+        });
+
+    });
+
+
+    // ---------------------------------
+    // DARK MODE
+    // ---------------------------------
+
+    const themeToggle = document.getElementById("themeToggle");
+
+    themeToggle.addEventListener("click", function () {
+
+        document.body.classList.toggle("dark");
+
+        const darkModeEnabled =
+            document.body.classList.contains("dark");
+
+        themeToggle.textContent =
+            darkModeEnabled ? "☀️" : "🌙";
+
+        themeToggle.setAttribute(
+            "aria-label",
+            darkModeEnabled
+                ? "Switch to light mode"
+                : "Switch to dark mode"
+        );
+
+    });
+
+
+    // ---------------------------------
+    // BACK TO TOP BUTTON
+    // ---------------------------------
+
+    const backToTop = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 400) {
+
+            backToTop.classList.add("show");
+
+        } else {
+
+            backToTop.classList.remove("show");
+
+        }
+
+    });
+
+    backToTop.addEventListener("click", function () {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    // ---------------------------------
+    // AUTOMATIC COPYRIGHT YEAR
+    // ---------------------------------
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+
+    // ---------------------------------
+    // CONTACT FORM DEMO
+    // ---------------------------------
+
+    const contactForm = document.getElementById("contactForm");
+
+    const formStatus = document.getElementById("formStatus");
+
+    contactForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        if (!contactForm.checkValidity()) {
+
+            contactForm.reportValidity();
+
+            return;
+
+        }
+
+        const name = document.getElementById("name").value.trim();
+
+        formStatus.textContent =
+            "Thank you, " + name +
+            "! This demo form is working, but no message was sent. " +
+            "Connect a backend or form service to receive messages.";
+
+        contactForm.reset();
+
+    });
+
+
+    // ---------------------------------
+    // NEWSLETTER DEMO
+    // ---------------------------------
+
+    const newsletterForm =
+        document.getElementById("newsletterForm");
+
+    const newsletterStatus =
+        document.getElementById("newsletterStatus");
+
+    newsletterForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        if (!newsletterForm.checkValidity()) {
+
+            newsletterForm.reportValidity();
+
+            return;
+
+        }
+
+        newsletterStatus.textContent =
+            "Thanks for your interest! This demo does not " +
+            "store your email or create a subscription.";
+
+        newsletterForm.reset();
+
+    });
+
+
+    // ---------------------------------
+    // SIMPLE SCROLL REVEAL
+    // ---------------------------------
+
+    const revealElements = document.querySelectorAll(
+        ".service-card, .project-card, .testimonial-card"
+    );
+
+    if ("IntersectionObserver" in window) {
+
+        const observer = new IntersectionObserver(
+            function (entries, currentObserver) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.style.opacity = "1";
+
+                        entry.target.style.transform = "translateY(0)";
+
+                        currentObserver.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+        revealElements.forEach(function (element) {
+
+            element.style.opacity = "0";
+
+            element.style.transform = "translateY(20px)";
+
+            element.style.transition =
+                "opacity 0.6s ease, transform 0.6s ease";
+
+            observer.observe(element);
+
+        });
+
+    }
+
+</script>
+```
+
+</body>
+</html>
